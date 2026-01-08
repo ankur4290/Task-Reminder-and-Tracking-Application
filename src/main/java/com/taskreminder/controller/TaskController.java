@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import java.util.Map;
+
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -25,4 +28,22 @@ public class TaskController {
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
+
+    @GetMapping("/overview")
+    public Map<String, Long> getTaskOverview() {
+        return taskService.getTaskOverview();
+    }
+
+    @PutMapping("/{id}/complete")
+    public Task markTaskCompleted(@PathVariable long id) {
+        return taskService.markCompleted(id);
+    }
+
+
+    @GetMapping("/dummy")
+    public String dummy() {
+        return "Hello";
+    }
+
+
 }

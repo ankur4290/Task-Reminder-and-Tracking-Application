@@ -13,20 +13,24 @@ import java.util.concurrent.TimeUnit;
 public class TaskSchedulerService {
 
     private final ScheduledExecutorService scheduler =
-            Executors.newSingleThreadScheduledExecutor();
+            Executors.newScheduledThreadPool(1);
 
     public void scheduleReminder(Task task) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime dueDate = task.getDueDate();
+        if (task.getDueDate() == null) return;
 
-        if (dueDate.isBefore(now)) {
-            return;
-        }
+        long delay = Duration.between(
+                LocalDateTime.now(),
+                task.getDueDate()
+        ).toMillis();
 
-        long delay = Duration.between(now, dueDate).toSeconds();
+        if (delay <= 0) return;
 
-        scheduler.schedule(() -> {
-            System.out.println(" REMINDER: Task '" + task.getTitle() + "' is due now!");
-        }, delay, TimeUnit.SECONDS);
+        scheduler.schedule(
+                () -> System.out.println(
+                        " REMINDER: Task '" + task.getTitle() + "' is due!"
+                ),
+                delay,
+                TimeUnit.MILLISECONDS
+        );
     }
 }

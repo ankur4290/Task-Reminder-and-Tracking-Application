@@ -5,7 +5,10 @@ import com.taskreminder.repository.TaskRepository;
 import com.taskreminder.scheduler.TaskSchedulerService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -33,5 +36,37 @@ public class TaskService {
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
+    }
+
+    public Task markCompleted(long id) {
+        Optional<Task> optionalTask = taskRepository.findById(id);
+
+        if (optionalTask.isEmpty()) {
+            throw new RuntimeException("Task not found with id: " + id);
+        }
+
+        Task task = optionalTask.get();
+        task.setCompleted(true);
+        taskRepository.update(task);
+
+        return task;
+    }
+
+    public Map<String, Long> getTaskOverview() {
+        List<Task> tasks = getAllTasks();
+
+        long total = tasks.size();
+        long completed = tasks.stream()
+                .filter(Task::isCompleted)
+                .count();
+
+        long pending = total - completed;
+
+        Map<String, Long> overview = new HashMap<>();
+        overview.put("total", total);
+        overview.put("completed", completed);
+        overview.put("pending", pending);
+
+        return overview;
     }
 }
