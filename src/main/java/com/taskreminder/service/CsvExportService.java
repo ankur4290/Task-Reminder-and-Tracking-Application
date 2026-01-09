@@ -10,7 +10,7 @@ import java.util.List;
 public class CsvExportService {
 
     public String exportTasksToCsv(List<Task> tasks) {
-        String fileName = "tasks-report.csv";
+        String fileName = "tasks-report-" + System.currentTimeMillis() + ".csv";
 
         try (FileWriter writer = new FileWriter(fileName)) {
 
@@ -19,9 +19,9 @@ public class CsvExportService {
             for (Task task : tasks) {
                 writer.write(
                         task.getId() + "," +
-                                task.getTitle() + "," +
-                                task.getDescription() + "," +
-                                task.getDueDate() + "," +
+                                "\"" + task.getTitle() + "\"," +
+                                "\"" + task.getDescription() + "\"," +
+                                "\"" + (task.getDueDate() != null ? task.getDueDate() : "") + "\"," +
                                 task.isCompleted() + "\n"
                 );
             }

@@ -17,17 +17,17 @@ spring:
     init:
       mode: always
 
-server:
-  port: 8081
-
   mail:
     host: smtp.gmail.com
     port: 587
-    username: YOUR_EMAIL@gmail.com
-    password: YOUR_APP_PASSWORD
+    username: 2k22.cse.2213528@gmail.com
+    password: 533826
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
+
+server:
+  port: 8081
