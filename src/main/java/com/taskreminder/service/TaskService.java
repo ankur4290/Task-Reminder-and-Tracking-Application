@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.taskreminder.model.TaskStatus;
+
+
 @Service
 public class TaskService {
 
@@ -69,4 +72,16 @@ public class TaskService {
 
         return overview;
     }
+
+    public TaskStatus getTaskStatus(Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        return new TaskStatus(
+                task.getId(),
+                task.isCompleted(),
+                task.getDueDate()
+        );
+    }
+
 }

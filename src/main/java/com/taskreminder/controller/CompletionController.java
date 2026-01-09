@@ -1,7 +1,9 @@
 package com.taskreminder.controller;
 
 import com.taskreminder.model.Task;
+import com.taskreminder.model.TaskStatus;
 import com.taskreminder.repository.TaskRepository;
+import com.taskreminder.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class CompletionController {
 
     private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
-    public CompletionController(TaskRepository taskRepository) {
+    public CompletionController(TaskRepository taskRepository, TaskService taskService) {
         this.taskRepository = taskRepository;
+        this.taskService = taskService;
     }
 
     @PutMapping("/mark/{id}")
@@ -24,11 +28,8 @@ public class CompletionController {
         return task;
     }
 
-    @GetMapping("/status/{id}")
-    public boolean getStatus(@PathVariable long id) {
-        return taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found"))
-                .isCompleted();
+    @GetMapping("/status/{taskId}")
+    public TaskStatus getStatus(@PathVariable Long taskId) {
+        return taskService.getTaskStatus(taskId);
     }
-
 }
