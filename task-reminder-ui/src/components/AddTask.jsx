@@ -11,8 +11,7 @@ function AddTask({ onTaskAdded }) {
     e.preventDefault()
     if (!title || !dueDate) return
 
-    const task = { title, description, dueDate }
-    await addTask(task)
+    await addTask({ title, description, dueDate })
 
     setTitle("")
     setDescription("")
@@ -21,15 +20,7 @@ function AddTask({ onTaskAdded }) {
   }
 
   return (
-    <div
-      style={{
-        marginBottom: "30px",
-        padding: "16px",
-        borderRadius: "8px",
-        background: "#fafafa",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
-      }}
-    >
+    <div style={{ marginBottom: "30px" }}>
       <h2>Add Task</h2>
 
       <form onSubmit={handleSubmit}>
@@ -63,9 +54,7 @@ function AddTask({ onTaskAdded }) {
             Done
           </button>
 
-          <button type="submit" disabled={!title || !dueDate}>
-            Add Task
-          </button>
+          <button type="submit">Add Task</button>
         </div>
       </form>
     </div>
