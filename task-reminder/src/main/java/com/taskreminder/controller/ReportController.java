@@ -2,6 +2,8 @@ package com.taskreminder.controller;
 
 import com.taskreminder.service.CsvExportService;
 import com.taskreminder.service.TaskService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+@Tag(
+        name = "Reports",
+        description = "APIs for exporting CSV reports and viewing task summaries"
+)
 @RestController
 @RequestMapping("/reports")
 public class ReportController {
@@ -22,11 +28,13 @@ public class ReportController {
         this.csvExportService = csvExportService;
     }
 
+    @Operation(summary = "Get overall task overview")
     @GetMapping("/overview")
     public Object overview() {
         return taskService.getTaskOverview();
     }
 
+    @Operation(summary = "Export tasks as CSV file")
     @PostMapping("/export")
     public ResponseEntity<byte[]> exportCsv() throws IOException {
 

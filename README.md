@@ -13,12 +13,12 @@ This repository follows a **monorepo structure**, containing both backend and fr
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
-Task-Reminder-and-Tracking-Application/
-├── task-reminder/ # Spring Boot Backend
-├── task-reminder-ui/ # React + Vite Frontend
-├── LICENSE # MIT License
+Task-Reminder-and-Tracking-Application/  
+├── task-reminder/ # Spring Boot Backend  
+├── task-reminder-ui/ # React + Vite Frontend  
+├── LICENSE # MIT License  
 └── README.md # Root documentation (this file)
 
 ---
@@ -40,8 +40,9 @@ The backend is responsible for:
 - ScheduledExecutorService for reminders
 - Mock email notification system
 - Centralized exception handling
+- Swagger (OpenAPI) documentation
 
-📄 Detailed backend documentation is available at:
+📄 Detailed backend documentation is available at:  
 task-reminder/README.md
 
 ---
@@ -56,7 +57,7 @@ The frontend provides a simple dashboard to:
 
 The frontend communicates with the backend using REST APIs.
 
-📄 Detailed frontend documentation is available at:
+📄 Detailed frontend documentation is available at:  
 task-reminder-ui/README.md
 
 ---
@@ -69,6 +70,7 @@ task-reminder-ui/README.md
 - JDBC (JdbcTemplate)
 - H2 In-Memory Database
 - Maven
+- Swagger (OpenAPI)
 
 ### Frontend
 - React
@@ -79,18 +81,34 @@ task-reminder-ui/README.md
 
 ---
 
+## 📘 API Documentation (Swagger)
+
+Swagger UI is integrated to provide interactive and user-friendly API documentation.
+
+### 🔗 Access Swagger UI
+Once the backend application is running, open the following URL in your browser:
+
+http://localhost:8081/swagger-ui/index.html
+
+### 🚀 Features
+- Interactive API exploration
+- Clear request and response schemas
+- Easy API testing directly from the browser (no Postman required)
+
+---
+
 ## 🔗 Frontend ↔ Backend API Mapping
 
-| Feature                  | API Endpoint                    |
-|--------------------------|---------------------------------|
-| Fetch all tasks          | `GET /tasks`                    |
-| Add task                 | `POST /tasks`                   |
-| Mark task completed      | `PUT /completion/mark/{id}`     |
-| Schedule reminder        | `POST /schedule/set`            |
-| Get reminder status      | `GET /schedule/reminders/{id}`  |
-| Get task status          | `GET /completion/status/{id}`   |
-| Export CSV report        | `POST /reports/export`          |
-| Task overview summary    | `GET /reports/overview`         |
+| Feature               | API Endpoint                   |
+|----------------------|--------------------------------|
+| Fetch all tasks       | `GET /tasks`                   |
+| Add task              | `POST /tasks`                  |
+| Mark task completed   | `PUT /completion/mark/{id}`    |
+| Schedule reminder     | `POST /schedule/set`           |
+| Get reminder status   | `GET /schedule/reminders/{id}` |
+| Get task status       | `GET /completion/status/{id}`  |
+| Export CSV report     | `POST /reports/export`         |
+| Task overview summary | `GET /reports/overview`        |
 
 ---
 
@@ -103,22 +121,24 @@ cd task-reminder
 mvn spring-boot:run
 Backend will start at:
 
-
 http://localhost:8081
+
 H2 Database Console:
 
 http://localhost:8081/h2-console
-2️⃣ Run Frontend
 
+2️⃣ Run Frontend
+bash
+Copy code
 cd task-reminder-ui
 npm install
 npm run dev
 Frontend will start at:
 
-
 http://localhost:5173
+
 🧪 Testing
-All backend APIs tested using Postman
+All backend APIs tested using Postman & Swagger UI
 
 Reminder lifecycle verified
 
@@ -179,7 +199,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 
 👤 Author
 Ankur Yadav

@@ -3,11 +3,17 @@ package com.taskreminder.controller;
 import com.taskreminder.model.Task;
 import com.taskreminder.repository.TaskRepository;
 import com.taskreminder.scheduler.TaskSchedulerService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@Tag(
+        name = "Scheduling",
+        description = "APIs for scheduling and managing task reminders"
+)
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleController {
@@ -21,6 +27,7 @@ public class ScheduleController {
         this.schedulerService = schedulerService;
     }
 
+    @Operation(summary = "Schedule a reminder for a task")
     @PostMapping("/set")
     public String setSchedule(@RequestBody Map<String, Object> request) {
         long taskId = Long.parseLong(request.get("taskId").toString());
@@ -36,9 +43,9 @@ public class ScheduleController {
         return "Reminder scheduled successfully";
     }
 
+    @Operation(summary = "Get reminder status for a task")
     @GetMapping("/reminders/{taskId}")
     public String getReminder(@PathVariable long taskId) {
         return schedulerService.getReminderStatus(taskId);
     }
-
 }
