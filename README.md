@@ -148,9 +148,6 @@ Frontend tested manually through browser
 
 Backend and frontend integration verified
 
-🎓 Academic Context
-This project was developed as part of a college academic project to demonstrate:
-
 Full-stack application development
 
 REST API design
@@ -180,7 +177,7 @@ See the LICENSE file for full license text.
 
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) [2026] [Ankur Yadav]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
